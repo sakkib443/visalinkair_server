@@ -1,0 +1,22 @@
+node_modules
+dist
+# .env removed to allow pushing environment variables as requested
+.vercel
+.env*.local
+
+# Locally uploaded files (in production these live on a Coolify volume)
+uploads
+
+# Environment files
+.env
+
+dev_server.log
+
+# Local data backup written by seed-thailand-profession-docs.js
+thailand-docs-backup.json
+
+# Local data backup written by migrate-hero-content.js
+hero-content-backup.json
+
+# Local data backup written by upload-hero-slides.js
+hero-slides-backup.json
