@@ -39,6 +39,13 @@ FROM node:22-slim AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 
+# curl is required by Coolify's container healthcheck - node:22-slim ships
+# neither curl nor wget, so without it the check always fails and a healthy
+# deployment gets rolled back.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends curl \
+    && rm -rf /var/lib/apt/lists/*
+
 # Copy only what the server needs to run.
 COPY --from=builder --chown=node:node /app/node_modules ./node_modules
 COPY --from=builder --chown=node:node /app/dist ./dist
