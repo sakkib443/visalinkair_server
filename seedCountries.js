@@ -1,5 +1,7 @@
 // Seed script - Direct API with login
-const API = "http://localhost:5000";
+// Target API. Defaults to a local dev server; set API_BASE to seed a
+// deployed backend instead, e.g. API_BASE=https://api.example.com
+const API = process.env.API_BASE || "http://localhost:5000";
 
 const commonDocs = [
     { title: "Valid Passport", titleBn: "বৈধ পাসপোর্ট", description: "Minimum 6 months validity with 2 blank pages", descriptionBn: "ন্যূনতম ৬ মাস মেয়াদ ও ২টি খালি পৃষ্ঠা", isRequired: true },

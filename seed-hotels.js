@@ -1,5 +1,12 @@
 const { MongoClient } = require("mongodb");
-const uri = "mongodb+srv://visaprobd:visaprobd@cluster0.b5kfivm.mongodb.net/visaprobd?appName=Cluster0";
+require('dotenv').config();
+// Read the connection string from .env instead of hardcoding it - the old
+// literal pointed at a retired Atlas cluster AND committed its credentials.
+const uri = process.env.DATABASE_URL;
+if (!uri) {
+    console.error('DATABASE_URL is not set (check .env).');
+    process.exit(1);
+}
 
 const hotels = [
     // ===== Bangladesh Hotels =====
@@ -436,7 +443,7 @@ async function seedHotels() {
         await client.connect();
         console.log("✅ Connected to MongoDB Atlas");
 
-        const db = client.db("visaprobd");
+        const db = client.db() /* database comes from DATABASE_URL, not a hardcoded name */;
         const collection = db.collection("hotels");
 
         // Remove existing hotels
