@@ -56,6 +56,7 @@ COPY --from=builder --chown=node:node /app/package.json ./package.json
 # downloaded files to the mounted volume and rewrites the DB to point at them.
 # Running it anywhere else would leave the DB pointing at files that don't exist here.
 COPY --from=builder --chown=node:node /app/migrate-cloudinary-to-local.js ./migrate-cloudinary-to-local.js
+COPY --from=builder --chown=node:node /app/seedSuperAdmin.js ./seedSuperAdmin.js
 
 # Uploads live here and MUST be backed by a persistent volume in Coolify
 # (Storages -> /app/uploads), otherwise every redeploy wipes user images.
